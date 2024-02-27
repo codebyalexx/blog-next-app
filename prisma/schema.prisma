@@ -7,6 +7,8 @@ datasource db {
   url      = "file:./dev.db"
 }
 
+// Next Auth
+
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -41,6 +43,8 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+// Application-related
+
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -51,4 +55,10 @@ model User {
   updatedAt     DateTime  @updatedAt
   accounts      Account[]
   sessions      Session[]
+}
+
+model NewsletterUser {
+  id        String   @id @default(cuid())
+  email     String
+  createdAt DateTime @default(now())
 }

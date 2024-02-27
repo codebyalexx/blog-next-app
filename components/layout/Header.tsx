@@ -1,7 +1,7 @@
 import { SignInButton } from "@/src/features/authentication/SignInButton";
 import Link from "next/link";
-import Logo from "../../public/Logo.svg";
 import { ThemeToggle } from "../theme-toggle";
+import { Logo } from "./Logo";
 
 export const Header = () => {
   return (
