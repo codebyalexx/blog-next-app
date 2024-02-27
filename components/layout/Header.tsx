@@ -1,4 +1,4 @@
-import { SignInButton } from "@/src/features/authentication/SignInButton";
+import { HeaderProfile } from "@/src/features/authentication/HeaderProfile";
 import Link from "next/link";
 import { ThemeToggle } from "../theme-toggle";
 import { Logo } from "./Logo";
@@ -48,7 +48,7 @@ const LeftNav = () => {
 const RightNav = () => {
   return (
     <div className="flex items-center gap-2">
-      <SignInButton />
+      <HeaderProfile />
       <ThemeToggle />
     </div>
   );
