@@ -15,10 +15,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body className="overflow-hidden">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Header />
-          {children}
+          <main className="flex flex-col items-center w-full p-4">
+            {children}
+          </main>
         </ThemeProvider>
       </body>
     </html>

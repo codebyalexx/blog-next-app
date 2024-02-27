@@ -21,7 +21,7 @@ const Brand = () => {
   return (
     <Link href={"/"} className="flex items-center gap-2">
       <Logo className="w-14 fill-black dark:fill-white" />
-      <h1 className="font-bold">Adventures By Alexx</h1>
+      <p className="font-bold">Adventures By Alexx</p>
     </Link>
   );
 };
