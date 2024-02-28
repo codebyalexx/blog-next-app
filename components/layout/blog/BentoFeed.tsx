@@ -21,8 +21,11 @@ export const BentoFeed = ({ posts }: { posts: any[] }) => {
 
 export const FirstBentoLayout = ({ posts }: { posts: any[] }) => {
   return (
-    <div className="grid grid-cols-3 gap-6">
-      <BlogBentoItem post={posts[0]} className={posts[1] ? "" : "col-span-3"} />
+    <div className="grid grid-cols-5 gap-6">
+      <BlogBentoItem
+        post={posts[0]}
+        className={cn("col-span-3", posts[1] ? "" : "col-span-5")}
+      />
       {posts[1] && <BlogBentoItem post={posts[1]} className="col-span-2" />}
     </div>
   );
@@ -30,12 +33,12 @@ export const FirstBentoLayout = ({ posts }: { posts: any[] }) => {
 
 export const SecondBentoLayout = ({ posts }: { posts: any[] }) => {
   return (
-    <div className="grid grid-cols-3 gap-6">
+    <div className="grid grid-cols-5 gap-6">
       <BlogBentoItem
         post={posts[0]}
-        className={cn("col-span-2", posts[1] ? "" : "col-span-3")}
+        className={cn("col-span-2", posts[1] ? "" : "col-span-5")}
       />
-      {posts[1] && <BlogBentoItem post={posts[1]} />}
+      {posts[1] && <BlogBentoItem post={posts[1]} className="col-span-3" />}
     </div>
   );
 };
@@ -54,7 +57,7 @@ export const BlogBentoItem = ({
       href={`/post/${post.id}`}
       className={cn(
         "w-full min-h-[260px] rounded-lg cursor-pointer bg-center bg-cover overflow-hidden shadow-white/5 shadow-xl",
-        "hover:scale-105 transition-all max-lg:col-span-3",
+        "hover:scale-105 transition-all max-lg:col-span-5",
         rotateDirection === 0 ? "hover:rotate-1" : "hover:-rotate-1",
         className
       )}
