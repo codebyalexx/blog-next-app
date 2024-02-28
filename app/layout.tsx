@@ -1,3 +1,4 @@
+import CookieConsent from "@/components/cookies-consent";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -31,6 +32,7 @@ export default async function RootLayout({
           </main>
           <Toaster />
           <Footer />
+          <CookieConsent />
           {modal}
         </ThemeProvider>
       </body>
