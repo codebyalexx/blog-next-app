@@ -1,3 +1,14 @@
+import Link from "next/link";
+
+export const Brand = () => {
+  return (
+    <Link href={"/"} className="flex items-center gap-2">
+      <Logo className="w-14 fill-black dark:fill-white" />
+      <p className="font-bold">Adventures By Alexx</p>
+    </Link>
+  );
+};
+
 export const Logo = ({ className }: { className?: string }) => (
   <svg
     version="1.0"

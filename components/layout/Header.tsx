@@ -1,7 +1,7 @@
 import { HeaderProfile } from "@/src/features/authentication/HeaderProfile";
 import Link from "next/link";
 import { ThemeToggle } from "../theme-toggle";
-import { Logo } from "./Logo";
+import { Brand } from "./Logo";
 
 export const Header = () => {
   return (
@@ -14,15 +14,6 @@ export const Header = () => {
         <RightNav />
       </div>
     </header>
-  );
-};
-
-const Brand = () => {
-  return (
-    <Link href={"/"} className="flex items-center gap-2">
-      <Logo className="w-14 fill-black dark:fill-white" />
-      <p className="font-bold">Adventures By Alexx</p>
-    </Link>
   );
 };
 
