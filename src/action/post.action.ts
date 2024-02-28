@@ -8,6 +8,8 @@ interface CreatePostProps {
   userId: string;
   title: string;
   description: string;
+  imageURL: string;
+  tags: string;
   contents: string;
   duration?: number;
   releasedAt: Date;
@@ -15,10 +17,6 @@ interface CreatePostProps {
 
 export const createPost = async (data: CreatePostProps) => {
   const session = await getAuthSession();
-
-  console.log(data);
-
-  console.log(session);
 
   /* Auth check */
 
@@ -41,6 +39,7 @@ export const createPost = async (data: CreatePostProps) => {
     };
 
   /* Data validation */
+  // TODO : here!!!!
 
   /* Insert */
   try {
@@ -58,9 +57,4 @@ export const createPost = async (data: CreatePostProps) => {
       message: "An unknown error has happened!",
     };
   }
-
-  return {
-    success: false,
-    message: "An unknown error has happened!!",
-  };
 };

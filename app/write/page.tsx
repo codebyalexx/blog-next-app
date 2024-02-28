@@ -17,9 +17,10 @@ import { ReactNode, useId, useState, useTransition } from "react";
 import { toast } from "sonner";
 
 const Page = ({ session }: { session: Session }) => {
-  /* title & desc */
+  /* title & desc ... */
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
 
   /* tags */
   const [tags, setTags] = useState([] as string[]);
@@ -61,6 +62,15 @@ const Page = ({ session }: { session: Session }) => {
         >
           Short description
         </InputForm>
+        <div className="col-span-2">
+          <InputForm
+            value={image}
+            onChange={setImage}
+            placeholder="Enter image URL..."
+          >
+            Banner image URL
+          </InputForm>
+        </div>
         <TagsForm tags={tags} onAdd={handeTagAdd} onRemove={handleTagRemove} />
         <PublishForm
           isScheduled={isScheduled}
@@ -82,6 +92,8 @@ const Page = ({ session }: { session: Session }) => {
                 contents: JSON.stringify(contents),
                 description,
                 title,
+                tags: tags.join(";"),
+                imageURL: image,
                 duration: 0,
                 releasedAt: isScheduled ? releaseDate : new Date(),
               });

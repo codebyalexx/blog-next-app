@@ -68,6 +68,8 @@ model Post {
   id          String   @id @default(cuid())
   userId      String
   title       String
+  imageURL    String   @default("")
+  tags        String   @default("")
   description String
   contents    String
   duration    Int      @default(0)
