@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Page = () => (
   <div className="w-full py-6 max-w-xl text-foreground/80 text-center">
-    <h1 className="text-3xl font-bold mb-4 text-white">About Me</h1>
+    <h1 className="text-3xl font-bold mb-4 text-foreground">About Me</h1>
     <p className="text-lg mb-6">
       Hey there, I&apos;m Alex, also known as Alex Development, and I&apos;m
       thrilled to welcome you to my corner of the internet!
@@ -42,7 +42,7 @@ const Page = () => (
     <div className="flex items-center justify-center my-8">
       <Button
         variant={"ghost"}
-        className="text-white flex items-center gap-2 text-lg p-6"
+        className="text-foreground flex items-center gap-2 text-lg p-6"
         asChild
       >
         <Link href={"/fun/latest-post"}>
