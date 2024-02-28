@@ -1,3 +1,6 @@
+import { AlertCircleIcon } from "lucide-react";
+import Link from "next/link";
+
 const Page = () => (
   <div className="w-full max-w-xl space-y-4">
     <h2 className="text-2xl">
@@ -39,6 +42,16 @@ const Page = () => (
     <h3 className="text-xl">
       <strong>Cookies</strong>
     </h3>
+
+    <p>
+      <Link
+        href={"/privacy"}
+        className="text-yellow-500 font-medium flex items-center gap-2"
+      >
+        <AlertCircleIcon /> Learn more about our privacy policy{" "}
+        <span className="underline">here</span>
+      </Link>
+    </p>
 
     <p>
       We employ the use of cookies. By accessing Adventures by Alexx, you agreed
