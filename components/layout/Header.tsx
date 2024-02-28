@@ -5,7 +5,7 @@ import { Brand } from "./Logo";
 
 export const Header = () => {
   return (
-    <header className="flex justify-center border-b border-muted-foreground/10">
+    <header className="*:z-10 flex justify-center border-b border-muted-foreground/10">
       <div className="p-3 w-full max-w-5xl flex items-center justify-between">
         <div className="flex items-center gap-8 w-full">
           <Brand />

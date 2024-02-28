@@ -20,7 +20,7 @@ export default function RootLayout({
       <body className="overflow-x-hidden">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Header />
-          <main className="flex flex-col items-center w-full p-4">
+          <main className="*:z-10 flex flex-col items-center w-full p-4">
             {children}
           </main>
           <Toaster />

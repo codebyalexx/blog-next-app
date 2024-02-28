@@ -10,7 +10,7 @@ import { Logo } from "./Logo";
 
 export const Footer = () => (
   <footer className="flex flex-col justify-center relative mt-[320px]">
-    <FooterSvg className="w-full absolute bottom-full" />
+    <FooterSvg className="w-full absolute bottom-full z-0" />
     <div className="w-full bg-[#333531] text-white flex items-center justify-center">
       <div className="w-full max-w-5xl grid grid-cols-4 gap-4 pt-16 pb-24">
         <div className="space-y-4">

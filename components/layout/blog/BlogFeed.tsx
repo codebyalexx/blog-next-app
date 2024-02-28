@@ -1,32 +1,45 @@
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import Link from "next/link";
+import { BentoFeed } from "./BentoFeed";
 
 const SAMPLE_POSTS = [
   {
-    title: "Lorem ipsum j'connais pas la suite",
-    image: "http://localhost:3000/_next/image?url=%2Fhero2.jpg&w=1080&q=75",
+    title: "Why do I always use tailwindcss in my projects?",
+    image:
+      "https://cdn.hashnode.com/res/hashnode/image/upload/v1704896264541/38fd02bb-e276-4b92-888f-0a11a6da2a41.jpeg?w=1600&h=840&fit=crop&crop=entropy&auto=compress,format&format=webp",
     createdAt: Date.now(),
+    id: "0",
+    tags: ["Development"],
   },
   {
     title: "Lorem ipsum j'connais pas la suite",
-    image: "http://localhost:3000/_next/image?url=%2Fhero2.jpg&w=1080&q=75",
+    image:
+      "https://www.csoonline.com/wp-content/uploads/2024/02/iStock-1490203155-1.jpg?resize=1024%2C562&quality=50&strip=all",
     createdAt: Date.now(),
+    id: "1",
+    tags: ["Lifestyle"],
   },
   {
-    title: "Lorem ipsum j'connais pas la suite",
-    image: "http://localhost:3000/_next/image?url=%2Fhero2.jpg&w=1080&q=75",
+    title: "POV je prends la pose quand je curl barre ptdr",
+    image:
+      "https://i.pinimg.com/736x/df/70/67/df7067802b37cc37b7405c1bba3aca5d.jpg",
     createdAt: Date.now(),
+    id: "2",
+    tags: ["Sports"],
   },
   {
-    title: "Lorem ipsum j'connais pas la suite",
-    image: "http://localhost:3000/_next/image?url=%2Fhero2.jpg&w=1080&q=75",
+    title: "L'image de fond c'est moi 1er degré",
+    image:
+      "https://img.freepik.com/free-photo/young-fitness-man-studio_7502-5008.jpg?size=626&ext=jpg&ga=GA1.1.1395880969.1708992000&semt=sph",
     createdAt: Date.now(),
+    id: "3",
+    tags: ["Sports"],
   },
   {
-    title: "Lorem ipsum j'connais pas la suite",
-    image: "http://localhost:3000/_next/image?url=%2Fhero2.jpg&w=1080&q=75",
+    title: "Objectif 100000 pas : le résumé de ma semaine",
+    image:
+      "https://nova-live.imgix.net//Personal%20Goal%20Setting-d2ab2f6f-0bed-47f6-9abd-55b3af5d9e65.jpg?",
     createdAt: Date.now(),
+    id: "4",
+    tags: ["Sports"],
   },
 ];
 
@@ -34,72 +47,7 @@ export const BlogFeed = () => {
   return (
     <div className="w-full max-w-6xl p-4 space-y-4">
       <h2 className="text-3xl font-bold">Blog Feed</h2>
-      <BlogBento posts={SAMPLE_POSTS} />
+      <BentoFeed posts={SAMPLE_POSTS} />
     </div>
-  );
-};
-
-export const BlogBento = ({ posts }: { posts: any[] }) => {
-  const items = [];
-  let last = true;
-  for (let i = 0; i < posts.length; i++) {
-    if (i % 2 === 0) {
-      if (last)
-        items.push(<FirstBentoLayout posts={posts.slice(i, i + 2)} key={i} />);
-      if (!last)
-        items.push(<SecondBentoLayout posts={posts.slice(i, i + 2)} key={i} />);
-      last = !last;
-    }
-  }
-
-  return <div className="space-y-4">{items.map((i) => i)}</div>;
-};
-
-export const FirstBentoLayout = ({ posts }: { posts: any[] }) => {
-  return (
-    <div className="grid grid-cols-3 space-x-4">
-      <BlogElement post={posts[0]} className={posts[1] ? "" : "col-span-3"} />
-      {posts[1] && <BlogElement post={posts[1]} className="col-span-2" />}
-    </div>
-  );
-};
-
-export const SecondBentoLayout = ({ posts }: { posts: any[] }) => {
-  return (
-    <div className="grid grid-cols-3 space-x-4">
-      <BlogElement
-        post={posts[0]}
-        className={cn("col-span-2", posts[1] ? "" : "col-span-3")}
-      />
-      {posts[1] && <BlogElement post={posts[1]} />}
-    </div>
-  );
-};
-
-export const BlogElement = ({
-  post,
-  className,
-}: {
-  post?: any;
-  className?: string;
-}) => {
-  return (
-    <Link
-      href={"/"}
-      className={cn(
-        "w-full min-h-[260px] rounded-lg cursor-pointer bg-center bg-cover overflow-hidden",
-        className
-      )}
-      style={{
-        backgroundImage:
-          "url('" + post?.image ||
-          "https://generated.vusercontent.net/placeholder.svg" + "')",
-      }}
-    >
-      <div className="bg-black bg-opacity-70 h-full w-full p-4 flex flex-col items-start justify-between">
-        <h3 className="text-xl font-semibold text-white">{post?.title}</h3>
-        <Button>Read more</Button>
-      </div>
-    </Link>
   );
 };
