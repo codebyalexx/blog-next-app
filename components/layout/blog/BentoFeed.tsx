@@ -51,26 +51,27 @@ export const BlogBentoItem = ({
 
   return (
     <Link
-      href={`/blog/${post.id}`}
+      href={`/post/${post.id}`}
       className={cn(
         "w-full min-h-[260px] rounded-lg cursor-pointer bg-center bg-cover overflow-hidden shadow-white/5 shadow-xl",
         "hover:scale-105 transition-all",
-        rotateDirection === 0 ? "hover:rotate-3" : "hover:-rotate-3",
+        rotateDirection === 0 ? "hover:rotate-1" : "hover:-rotate-1",
         className
       )}
       style={{
         backgroundImage:
-          "url('" + post?.image ||
+          "url('" + post?.imageURL ||
           "https://generated.vusercontent.net/placeholder.svg" + "')",
       }}
     >
       <div className="bg-black bg-opacity-70 h-full w-full p-4 flex flex-col items-start justify-between">
-        <h3 className="text-xl font-semibold text-white">{post?.title}</h3>
+        <h3 className="text-xl font-semibold text-white">{post.title}</h3>
         <div className="flex items-center gap-2">
           <p className="text-xs text-white/80">
-            {moment(post.createdAt).format("D MMMM")} • 0 minutes read
+            {moment(post.releasedAt).format("D MMMM")} • {post.duration} minutes
+            read
           </p>
-          <Badge variant={"secondary"}>{post.tags[0]}</Badge>
+          <Badge variant={"secondary"}>{post.tags.split(";")[0] || ""}</Badge>
         </div>
         {/*<Button>Read more</Button>*/}
       </div>

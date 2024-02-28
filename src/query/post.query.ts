@@ -11,6 +11,8 @@ export const getPostsFeed = async () => {
       userId: true,
       releasedAt: true,
       duration: true,
+      tags: true,
+      imageURL: true,
     },
   });
   return res;
