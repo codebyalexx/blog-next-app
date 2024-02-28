@@ -2,6 +2,25 @@
 
 import { prisma } from "@/lib/prisma";
 
+export const getLatestPostId = async () => {
+  const res = await prisma.post.findFirst({
+    select: {
+      id: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return res?.id || null;
+};
+
+export const getRandomPostId = async () => {
+  const posts = await getPostsFeed();
+  const index = Math.round(Math.random() * (posts.length - 1));
+  return posts[index]?.id || null;
+};
+
 export const getPostsFeed = async () => {
   const res = await prisma?.post.findMany({
     select: {
