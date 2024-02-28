@@ -10,11 +10,15 @@ interface CreatePostProps {
   description: string;
   contents: string;
   duration?: number;
-  releasedAt?: Date;
+  releasedAt: Date;
 }
 
 export const createPost = async (data: CreatePostProps) => {
   const session = await getAuthSession();
+
+  console.log(data);
+
+  console.log(session);
 
   /* Auth check */
 
@@ -24,7 +28,7 @@ export const createPost = async (data: CreatePostProps) => {
       message: "Unauthorized",
     };
 
-  if (Writers.includes(session?.user?.email || ""))
+  if (!Writers.includes(session?.user?.email || ""))
     return {
       success: false,
       message: "Unauthorized",
@@ -40,9 +44,13 @@ export const createPost = async (data: CreatePostProps) => {
 
   /* Insert */
   try {
-    await prisma.post.create({
+    const insert = await prisma.post.create({
       data,
     });
+    return {
+      success: true,
+      postId: insert.id,
+    };
   } catch (e) {
     console.log(e);
     return {
@@ -52,6 +60,7 @@ export const createPost = async (data: CreatePostProps) => {
   }
 
   return {
-    success: true,
+    success: false,
+    message: "An unknown error has happened!!",
   };
 };

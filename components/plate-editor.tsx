@@ -2,8 +2,7 @@
 
 import { cn } from "@udecode/cn";
 import { CommentsProvider } from "@udecode/plate-comments";
-import { Plate } from "@udecode/plate-common";
-import { ELEMENT_PARAGRAPH } from "@udecode/plate-paragraph";
+import { Plate, TElement } from "@udecode/plate-common";
 import { useRef } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -20,21 +19,19 @@ import { commentsUsers, myUserId } from "@/lib/plate/comments";
 import { MENTIONABLES } from "@/lib/plate/mentionables";
 import { plugins } from "@/lib/plate/plate-plugins";
 
-export default function PlateEditor() {
+export default function PlateEditor({
+  value,
+  setValue,
+}: {
+  value: TElement[];
+  setValue: (value: TElement[]) => void;
+}) {
   const containerRef = useRef(null);
-
-  const initialValue = [
-    {
-      id: "1",
-      type: ELEMENT_PARAGRAPH,
-      children: [{ text: "Hello, World!" }],
-    },
-  ];
 
   return (
     <DndProvider backend={HTML5Backend}>
       <CommentsProvider users={commentsUsers} myUserId={myUserId}>
-        <Plate plugins={plugins} initialValue={initialValue}>
+        <Plate plugins={plugins} value={value} onChange={setValue}>
           <div
             ref={containerRef}
             className={cn(

@@ -7,9 +7,14 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Loader } from "@/components/ui/loader";
+import { createPost } from "@/src/action/post.action";
+import { TElement } from "@udecode/plate-common";
 import { SendIcon, Trash2Icon } from "lucide-react";
 import { Session } from "next-auth";
-import { ReactNode, useId, useState } from "react";
+import { redirect } from "next/navigation";
+import { ReactNode, useId, useState, useTransition } from "react";
+import { toast } from "sonner";
 
 const Page = ({ session }: { session: Session }) => {
   /* title & desc */
@@ -24,7 +29,19 @@ const Page = ({ session }: { session: Session }) => {
 
   /* release schedule */
   const [isScheduled, setIsScheduled] = useState(false);
-  const [releaseDate, setReleaseDate] = useState<Date>();
+  const [releaseDate, setReleaseDate] = useState<Date>(new Date());
+
+  /* plate editor */
+  const [contents, setContents] = useState<TElement[]>([
+    {
+      id: "1",
+      type: "p",
+      children: [{ text: "Hello, World!" }],
+    },
+  ]);
+
+  /* loading */
+  const [isLoading, startTransition] = useTransition();
 
   return (
     <>
@@ -54,11 +71,43 @@ const Page = ({ session }: { session: Session }) => {
       </div>
       <h2 className="text-2xl font-bold">Editor</h2>
       <div className="w-full max-w-[1336px] rounded-lg border bg-background shadow">
-        <PlateEditor />
+        <PlateEditor value={contents} setValue={setContents} />
       </div>
       <div className="flex items-center justify-end">
-        <Button onClick={() => {}} className="w-full" disabled>
-          Publish <SendIcon className="w-4 h-4" />
+        <Button
+          onClick={async () => {
+            startTransition(async () => {
+              const res = await createPost({
+                userId: session?.user?.id || "0",
+                contents: JSON.stringify(contents),
+                description,
+                title,
+                duration: 0,
+                releasedAt: isScheduled ? releaseDate : new Date(),
+              });
+
+              if (res.success) {
+                const { postId } = res;
+                redirect(`/post/${postId}`);
+              } else {
+                toast.error(res.message);
+              }
+
+              return;
+            });
+          }}
+          className="w-full flex items-center gap-2"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <>
+              Publishing... <Loader />
+            </>
+          ) : (
+            <>
+              Publish <SendIcon className="w-4 h-4" />
+            </>
+          )}
         </Button>
       </div>
     </>
