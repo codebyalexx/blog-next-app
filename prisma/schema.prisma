@@ -78,3 +78,11 @@ model Post {
 
   user User @relation(fields: [userId], references: [id], onDelete: NoAction)
 }
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now())
+}
