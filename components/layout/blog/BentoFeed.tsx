@@ -21,7 +21,7 @@ export const BentoFeed = ({ posts }: { posts: any[] }) => {
 
 export const FirstBentoLayout = ({ posts }: { posts: any[] }) => {
   return (
-    <div className="grid grid-cols-3 space-x-6">
+    <div className="grid grid-cols-3 gap-6">
       <BlogBentoItem post={posts[0]} className={posts[1] ? "" : "col-span-3"} />
       {posts[1] && <BlogBentoItem post={posts[1]} className="col-span-2" />}
     </div>
@@ -30,7 +30,7 @@ export const FirstBentoLayout = ({ posts }: { posts: any[] }) => {
 
 export const SecondBentoLayout = ({ posts }: { posts: any[] }) => {
   return (
-    <div className="grid grid-cols-3 space-x-6">
+    <div className="grid grid-cols-3 gap-6">
       <BlogBentoItem
         post={posts[0]}
         className={cn("col-span-2", posts[1] ? "" : "col-span-3")}
@@ -54,7 +54,7 @@ export const BlogBentoItem = ({
       href={`/post/${post.id}`}
       className={cn(
         "w-full min-h-[260px] rounded-lg cursor-pointer bg-center bg-cover overflow-hidden shadow-white/5 shadow-xl",
-        "hover:scale-105 transition-all",
+        "hover:scale-105 transition-all max-lg:col-span-3",
         rotateDirection === 0 ? "hover:rotate-1" : "hover:-rotate-1",
         className
       )}
@@ -73,7 +73,6 @@ export const BlogBentoItem = ({
           </p>
           <Badge variant={"secondary"}>{post.tags.split(";")[0] || ""}</Badge>
         </div>
-        {/*<Button>Read more</Button>*/}
       </div>
     </Link>
   );

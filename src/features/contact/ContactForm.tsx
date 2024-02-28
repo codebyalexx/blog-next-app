@@ -63,7 +63,7 @@ export const ContactForm = ({ className }: { className?: string }) => {
       </CardHeader>
       <CardContent>
         <form className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1  md:grid-cols-2  gap-4">
             <div className="space-y-2">
               <Label htmlFor="first-name">Name</Label>
               <Input

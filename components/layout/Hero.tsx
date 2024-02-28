@@ -4,7 +4,7 @@ import Image from "next/image";
 export const Hero = () => {
   return (
     <div className="w-full max-w-7xl mb-4 py-12 grid grid-cols-2 gap-4">
-      <div className="h-full w-full flex flex-col items-start space-y-6  justify-center">
+      <div className="h-full w-full flex flex-col items-start space-y-6 justify-center max-lg:col-span-2">
         <p className="font-extrabold uppercase inline bg-gradient-to-r from-[#F596D3]  to-[#D247BF] text-transparent bg-clip-text">
           — Believe the hike
         </p>
@@ -27,7 +27,7 @@ export const Hero = () => {
         </p>
         <NewsletterForm />
       </div>
-      <div className="flex items-center space-x-5">
+      <div className="hidden lg:flex items-center space-x-5">
         <Image
           className="h-[580px] w-[80%] rounded-md object-cover object-center shadow-md"
           src={"/hero2.jpg"}

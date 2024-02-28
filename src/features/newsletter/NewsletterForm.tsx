@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Loader } from "@/components/ui/loader";
 import { registerToNewsletter } from "@/src/action/newsletter.action";
 import { CornerDownLeftIcon, PartyPopperIcon } from "lucide-react";
@@ -49,8 +50,8 @@ export const NewsletterForm = () => {
         });
       }}
     >
-      <label htmlFor={id}>Subscribe to my newsletter</label>
-      <div className="w-full flex items-center gap-2">
+      <Label htmlFor={id}>Subscribe to my newsletter</Label>
+      <div className="w-full flex max-sm:flex-wrap items-center gap-2">
         <Input
           type="email"
           name="email"

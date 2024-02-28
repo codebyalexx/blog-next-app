@@ -9,10 +9,10 @@ import { buttonVariants } from "../ui/button";
 import { Logo } from "./Logo";
 
 export const Footer = () => (
-  <footer className="flex flex-col justify-center relative mt-[320px]">
+  <footer className="flex flex-col justify-center relative mt-24 md:mt-28 lg:mt-[320px]">
     <FooterSvg className="w-full absolute bottom-full z-0" />
     <div className="w-full bg-[#333531] text-white flex items-center justify-center">
-      <div className="w-full max-w-5xl grid grid-cols-4 gap-4 pt-16 pb-24">
+      <div className="w-fit max-w-5xl grid *:col-span-4 md:*:col-span-2 xl:*:col-span-1 grid-cols-4 gap-10 pt-16 pb-24">
         <div className="space-y-4">
           <div className="flex items-center gap-2">
             <Logo className="w-14 fill-white" />

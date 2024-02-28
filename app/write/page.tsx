@@ -47,7 +47,7 @@ const Page = ({ session }: { session: Session }) => {
   return (
     <>
       <h1 className="text-3xl font-bold mb-2">Create post</h1>
-      <div className="grid grid-cols-2 gap-x-2 gap-y-4">
+      <div className="grid grid-cols-2 max-md:*:col-span-2 gap-x-2 gap-y-4">
         <InputForm
           value={title}
           onChange={setTitle}

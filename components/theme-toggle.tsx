@@ -10,7 +10,8 @@ export const ThemeToggle = () => {
     <Button
       variant={"ghost"}
       size={"sm"}
-      onClick={() => {
+      onClick={(e) => {
+        e.stopPropagation();
         setTheme(theme === "light" ? "dark" : "light");
       }}
     >
