@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Writers } from "@/lib/utils";
-import { ListIcon, PlusIcon } from "lucide-react";
+import { GaugeCircleIcon, ListIcon, PlusIcon } from "lucide-react";
 import { Session } from "next-auth";
 import Link from "next/link";
 import { DropdownMenuItemLogout } from "./DropdownMenuItemLogout";
@@ -42,6 +42,12 @@ export const HeaderProfileDropdown = ({
     <DropdownMenuContent className="w-56">
       {Writers.includes(session?.user?.email || "") && (
         <>
+          <DropdownMenuItem asChild>
+            <Link href={"/analytics"}>
+              <GaugeCircleIcon className={"mr-2 h-4 w-4"} />
+              Analytics
+            </Link>
+          </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <Link href={"/manage-posts"}>
               <ListIcon className={"mr-2 h-4 w-4"} />
