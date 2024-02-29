@@ -1,5 +1,5 @@
 import { getAuthSession } from "@/lib/auth";
-import { getPostsFeed } from "@/src/query/post.query";
+import { getAllPosts } from "@/src/query/post.query";
 import Page from "./page";
 
 export const dynamic = "force-dynamic";
@@ -7,7 +7,9 @@ export const dynamic = "force-dynamic";
 export default async function layout() {
   const session = await getAuthSession();
 
-  const posts = await getPostsFeed();
+  const posts = await getAllPosts();
 
-  return <Page session={session} posts={posts} />;
+  console.log(posts);
+
+  return <Page session={session} posts={posts.data || []} />;
 }

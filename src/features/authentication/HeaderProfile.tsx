@@ -43,9 +43,9 @@ export const HeaderProfileDropdown = ({
       {Writers.includes(session?.user?.email || "") && (
         <>
           <DropdownMenuItem asChild>
-            <Link href={"/analytics"}>
+            <Link href={"/dashboard"}>
               <GaugeCircleIcon className={"mr-2 h-4 w-4"} />
-              Analytics
+              Dashboard
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
