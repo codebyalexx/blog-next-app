@@ -86,7 +86,7 @@ model Post {
 
 model Like {
   id        String   @id @default(cuid())
-  createdAt DateTime
+  createdAt DateTime @default(now())
 
   postId String
   post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)

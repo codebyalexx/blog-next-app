@@ -47,7 +47,7 @@ export const CommentPostBox = ({
         <form
           onSubmit={async (e) => {
             e.preventDefault();
-            if (!session || !session.user) signIn();
+            if (!session || !session.user) return signIn();
 
             startTransition(async () => {
               const res = await addComment({
@@ -74,7 +74,7 @@ export const CommentPostBox = ({
             rows={3}
             value={comment}
             onChange={(e) => {
-              if (!session || !session.user) signIn();
+              if (!session || !session.user) return signIn();
               setComment(e.target.value);
             }}
             onClick={() => {

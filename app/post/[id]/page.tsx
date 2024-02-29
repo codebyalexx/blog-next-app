@@ -13,6 +13,20 @@ const Page = ({ post, session }: { post: any; session: Session | null }) => {
   const handleCommentAdd = (comment: any) =>
     setComments([comment, ...comments]);
 
+  const [likes, setLikes] = useState(post.likes);
+  const handleLikeAdd = (like: any) => setLikes([like, ...likes]);
+  const handleLikeRemove = (likeId: any) =>
+    setLikes(likes.filter((like: any) => like.id !== likeId));
+
+  const postInteractionsItems = (
+    <PostInteractionItems
+      postId={post.id}
+      session={session}
+      defaultComments={comments}
+      defaultLikes={likes}
+    />
+  );
+
   return (
     <div className="w-full max-w-2xl space-y-6 py-4 flex flex-col items-center justify-center">
       <div className="w-full max-w-2xl space-y-8">
@@ -30,19 +44,14 @@ const Page = ({ post, session }: { post: any; session: Session | null }) => {
 
         <div className="space-y-3">
           <Separator />
-          <PostInteractionItems
-            comments={comments}
-            onCommentAdd={handleCommentAdd}
-            postId={post.id}
-            session={session}
-          />
+          {postInteractionsItems}
           <Separator />
         </div>
 
         <PostReader data={post.contents} />
 
         <div className="py-16 space-y-8">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             {post.tags.split(";").map((tag: any) => (
               <Link
                 key={tag}
@@ -53,12 +62,7 @@ const Page = ({ post, session }: { post: any; session: Session | null }) => {
               </Link>
             ))}
           </div>
-          <PostInteractionItems
-            comments={comments}
-            onCommentAdd={handleCommentAdd}
-            postId={post.id}
-            session={session}
-          />
+          {postInteractionsItems}
         </div>
       </div>
     </div>
