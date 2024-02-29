@@ -3,10 +3,22 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Loader } from "@/components/ui/loader";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
-import { addComment } from "@/src/action/comment.action";
-import { MoreVerticalIcon } from "lucide-react";
+import { Writers, cn } from "@/lib/utils";
+import { addComment, deleteComment } from "@/src/action/comment.action";
+import {
+  FlagIcon,
+  MoreVerticalIcon,
+  ShieldAlertIcon,
+  TrashIcon,
+} from "lucide-react";
 import moment from "moment";
 import { Session } from "next-auth";
 import { signIn } from "next-auth/react";
@@ -107,11 +119,29 @@ export const CommentPostBox = ({
 
 export const CommentBox = ({
   comment,
+  session,
   className,
+  onCommentRemove,
 }: {
   comment: any;
+  session: Session | null;
   className?: string;
+  onCommentRemove: (commentId: string) => void;
 }) => {
+  const [deleteLoading, startDeleteTransition] = useTransition();
+  const handleDeleteComment = async () => {
+    startDeleteTransition(async () => {
+      const res = await deleteComment(comment.id);
+
+      if (res.success) {
+        toast.success("Successfully deleted comment!");
+        onCommentRemove(comment.id);
+      } else {
+        toast.error(res.message);
+      }
+    });
+  };
+
   return (
     <div className={cn("py-10 space-y-2", className)}>
       <div key={comment.id} className="flex items-center space-x-2">
@@ -126,9 +156,64 @@ export const CommentBox = ({
               {moment(comment.createdAt).fromNow()}
             </span>
           </div>
-          <Button variant={"link"}>
-            <MoreVerticalIcon className="w-4 h-4" />
-          </Button>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant={"link"}>
+                <MoreVerticalIcon className="w-4 h-4" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-fit p-2">
+              {comment.userId === session?.user?.id && (
+                <Button
+                  variant={"ghost"}
+                  className="flex items-center gap-2 w-full"
+                  disabled={deleteLoading}
+                  onClick={handleDeleteComment}
+                >
+                  {deleteLoading ? (
+                    <Loader />
+                  ) : (
+                    <>
+                      <TrashIcon className="w-4 h-4" /> Delete
+                    </>
+                  )}
+                </Button>
+              )}
+              <Button
+                variant={"ghost"}
+                className="flex items-center gap-2 w-full"
+                disabled
+              >
+                <FlagIcon className="w-4 h-4" /> Report comment
+              </Button>
+              {Writers.includes(session?.user?.email) && (
+                <>
+                  <Separator className="my-2" />
+                  <Button
+                    variant={"ghost"}
+                    className="flex items-center gap-2 w-full"
+                    disabled={deleteLoading}
+                    onClick={handleDeleteComment}
+                  >
+                    {deleteLoading ? (
+                      <Loader />
+                    ) : (
+                      <>
+                        <ShieldAlertIcon className="w-4 h-4" /> Delete comment
+                      </>
+                    )}
+                  </Button>
+                  <Button
+                    variant={"ghost"}
+                    className="flex items-center gap-2 w-full"
+                    disabled
+                  >
+                    <ShieldAlertIcon className="w-4 h-4" /> Restrict user
+                  </Button>
+                </>
+              )}
+            </PopoverContent>
+          </Popover>
         </div>
       </div>
       <p>{comment.message}</p>

@@ -2,6 +2,7 @@
 
 import { getAuthSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { Writers } from "../../lib/utils";
 import { COMMENT_SELECT } from "../features/comments/comment-utils";
 
 interface IAddComments {
@@ -63,4 +64,48 @@ export const addComment = async ({ postId, userId, message }: IAddComments) => {
       message: "An error has occurred while trying to add your comment",
     };
   }
+};
+
+export const deleteComment = async (commentId: string) => {
+  /* Retrieving comment */
+  const comment = await prisma.comment.findFirst({
+    where: {
+      id: commentId,
+    },
+  });
+
+  if (!comment)
+    return {
+      success: false,
+      message: "The target comment cannot be found",
+    };
+
+  /* Checking session */
+  const session = await getAuthSession();
+
+  if (!session)
+    return {
+      success: false,
+      message: "Unauthorized",
+    };
+
+  const isWriter = Writers.includes(session?.user?.email || "");
+  const isAuthor = comment.userId === session?.user?.id;
+
+  if (!isWriter || (!isWriter && !isAuthor))
+    return {
+      success: false,
+      message: "Unauthorized",
+    };
+
+  /* deleting comment */
+  await prisma.comment.delete({
+    where: {
+      id: commentId,
+    },
+  });
+
+  return {
+    success: true,
+  };
 };

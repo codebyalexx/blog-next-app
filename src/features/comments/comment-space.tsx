@@ -16,12 +16,14 @@ export const CommentSpace = ({
   children,
   comments,
   onCommentAdd,
+  onCommentRemove,
   postId,
   session,
 }: {
   children: ReactNode;
   comments: any[];
   onCommentAdd: (comment: any) => void;
+  onCommentRemove: (comment: any) => void;
   postId: string;
   session: Session | null;
 }) => {
@@ -52,6 +54,8 @@ export const CommentSpace = ({
               <CommentBox
                 key={comment.id}
                 comment={comment}
+                session={session}
+                onCommentRemove={onCommentRemove}
                 className={
                   comments.indexOf(comment) === comments.length - 1
                     ? ""

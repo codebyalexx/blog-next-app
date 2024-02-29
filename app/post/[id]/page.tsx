@@ -15,6 +15,8 @@ const Page = ({ post, session }: { post: any; session: Session | null }) => {
   const [comments, setComments] = useState(post.comments);
   const handleCommentAdd = (comment: any) =>
     setComments([comment, ...comments]);
+  const handleCommentRemove = (commentId: string) =>
+    setComments(comments.filter((comment: any) => comment.id !== commentId));
 
   const [likes, setLikes] = useState(post.likes);
   const [liked, setLiked] = useState(
@@ -45,6 +47,7 @@ const Page = ({ post, session }: { post: any; session: Session | null }) => {
       session={session}
       comments={comments}
       onCommentAdd={handleCommentAdd}
+      onCommentRemove={handleCommentRemove}
       likes={likes}
       liked={liked}
       onLike={handleLike}

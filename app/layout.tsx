@@ -30,7 +30,7 @@ export default async function RootLayout({
           <main className="*:z-10 flex flex-col items-center w-full p-4">
             {children}
           </main>
-          <Toaster />
+          <Toaster position="bottom-center" />
           <Footer />
           <CookieConsent />
           {modal}

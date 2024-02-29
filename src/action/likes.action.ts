@@ -18,7 +18,7 @@ export const toggleLike = async (postId: string, userId: string) => {
     res = await prisma.like.findMany({
       where: {
         postId,
-        userId,
+        userId: session?.user?.id,
       },
     });
   } catch (e) {
@@ -35,7 +35,7 @@ export const toggleLike = async (postId: string, userId: string) => {
       await prisma.like.deleteMany({
         where: {
           postId,
-          userId,
+          userId: session?.user?.id,
         },
       });
       return {
@@ -47,7 +47,7 @@ export const toggleLike = async (postId: string, userId: string) => {
       const res = await prisma.like.create({
         data: {
           postId,
-          userId,
+          userId: session?.user?.id,
         },
       });
       return {

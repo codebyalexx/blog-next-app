@@ -21,6 +21,7 @@ export const PostInteractionItems = ({
   postId,
   comments,
   onCommentAdd,
+  onCommentRemove,
   likes,
   liked,
   onLike,
@@ -29,6 +30,7 @@ export const PostInteractionItems = ({
   postId: string;
   comments: any[];
   onCommentAdd: (comment: any) => void;
+  onCommentRemove: (commentId: string) => void;
   likes: any[];
   liked: boolean;
   onLike: (e: any) => void;
@@ -50,6 +52,7 @@ export const PostInteractionItems = ({
         <CommentSpace
           comments={comments}
           onCommentAdd={onCommentAdd}
+          onCommentRemove={onCommentRemove}
           postId={postId}
           session={session}
         >

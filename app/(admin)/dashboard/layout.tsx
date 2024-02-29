@@ -12,11 +12,12 @@ const Page = ({ children }: { children: ReactNode }) => (
           </p>
         </div>
         <Tabs defaultValue="overview">
-          <TabsList className="grid w-full max-w-xl grid-cols-4">
+          <TabsList className="grid w-full max-w-2xl grid-cols-5">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="analytics">Analytics</TabsTrigger>
             <TabsTrigger value="comments">Comments</TabsTrigger>
-            <TabsTrigger value="newsletter">Newsletter</TabsTrigger>
+            <TabsTrigger value="users">Users</TabsTrigger>
+            <TabsTrigger value="moderation">Moderation</TabsTrigger>
           </TabsList>
           {children}
         </Tabs>
