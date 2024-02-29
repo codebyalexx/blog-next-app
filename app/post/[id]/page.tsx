@@ -1,10 +1,13 @@
 "use client";
 
 import { Separator } from "@/components/ui/separator";
+import { toggleLike } from "@/src/action/likes.action";
 import { Session } from "next-auth";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { toast } from "sonner";
 import { PostInteractionItems } from "./PostInteractionItems";
 import { PostReader } from "./PostReader";
 
@@ -14,16 +17,37 @@ const Page = ({ post, session }: { post: any; session: Session | null }) => {
     setComments([comment, ...comments]);
 
   const [likes, setLikes] = useState(post.likes);
-  const handleLikeAdd = (like: any) => setLikes([like, ...likes]);
-  const handleLikeRemove = (likeId: any) =>
-    setLikes(likes.filter((like: any) => like.id !== likeId));
+  const [liked, setLiked] = useState(
+    post.likes.some((like: any) => like.userId === session?.user?.id) || false
+  );
+  const handleLike = async () => {
+    if (!session || !session.user) return signIn();
+
+    const res = await toggleLike(post.id, session?.user?.id);
+
+    if (res.success) {
+      const newLiked = res.liked || false;
+      setLiked(newLiked);
+
+      if (newLiked) setLikes([...likes, res.data]);
+      if (!newLiked)
+        setLikes(
+          likes.filter((like: any) => like.userId !== session?.user?.id)
+        );
+    } else {
+      toast.error(res.message);
+    }
+  };
 
   const postInteractionsItems = (
     <PostInteractionItems
       postId={post.id}
       session={session}
-      defaultComments={comments}
-      defaultLikes={likes}
+      comments={comments}
+      onCommentAdd={handleCommentAdd}
+      likes={likes}
+      liked={liked}
+      onLike={handleLike}
     />
   );
 

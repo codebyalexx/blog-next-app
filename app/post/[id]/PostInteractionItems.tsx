@@ -7,7 +7,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import { toggleLike } from "@/src/action/likes.action";
 import { CommentSpace } from "@/src/features/comments/comment-space";
 import {
   CopyIcon,
@@ -16,49 +15,25 @@ import {
   ShareIcon,
 } from "lucide-react";
 import { Session } from "next-auth";
-import { signIn } from "next-auth/react";
-import { useState } from "react";
 import { toast } from "sonner";
 
 export const PostInteractionItems = ({
   postId,
-  defaultComments,
-  defaultLikes,
+  comments,
+  onCommentAdd,
+  likes,
+  liked,
+  onLike,
   session,
 }: {
   postId: string;
-  defaultComments: any[];
-  defaultLikes: any[];
+  comments: any[];
+  onCommentAdd: (comment: any) => void;
+  likes: any[];
+  liked: boolean;
+  onLike: (e: any) => void;
   session: Session | null;
 }) => {
-  const [comments, setComments] = useState(defaultComments);
-  const handleCommentAdd = (comment: any) =>
-    setComments([comment, ...comments]);
-
-  const [likes, setLikes] = useState(defaultLikes);
-  const [liked, setLiked] = useState(
-    defaultLikes.some((like: any) => like.userId === session?.user?.id) || false
-  );
-
-  const handleLike = async () => {
-    if (!session || !session.user) return signIn();
-
-    const res = await toggleLike(postId, session?.user?.id);
-
-    if (res.success) {
-      const newLiked = res.liked || false;
-      setLiked(newLiked);
-
-      if (newLiked) setLikes([...likes, res.data]);
-      if (!newLiked)
-        setLikes(
-          likes.filter((like: any) => like.userId !== session?.user?.id)
-        );
-    } else {
-      toast.error(res.message);
-    }
-  };
-
   return (
     <div className="flex items-center justify-between text-muted-foreground">
       <div className="flex items-center gap-4">
@@ -67,14 +42,14 @@ export const PostInteractionItems = ({
             "flex items-center gap-2 hover:text-foreground cursor-pointer",
             liked ? "text-red-500 hover:text-red-600" : ""
           )}
-          onClick={handleLike}
+          onClick={onLike}
         >
           <HeartIcon className="w-5 h-5" strokeWidth={liked ? 2.5 : 2} />{" "}
           {likes.length}
         </div>
         <CommentSpace
           comments={comments}
-          onCommentAdd={handleCommentAdd}
+          onCommentAdd={onCommentAdd}
           postId={postId}
           session={session}
         >
