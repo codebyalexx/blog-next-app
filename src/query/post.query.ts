@@ -33,6 +33,9 @@ export const getPostsFeed = async () => {
       tags: true,
       imageURL: true,
     },
+    orderBy: {
+      releasedAt: "desc",
+    },
   });
   return res;
 };

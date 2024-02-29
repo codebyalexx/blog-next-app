@@ -1,6 +1,8 @@
 import { getPostsFeed } from "@/src/query/post.query";
 import { BentoFeed } from "./BentoFeed";
 
+export const revalidate = 300;
+
 export const BlogFeed = async () => {
   const posts = await getPostsFeed();
 

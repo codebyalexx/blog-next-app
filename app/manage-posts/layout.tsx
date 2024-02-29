@@ -4,6 +4,8 @@ import { getPostsFeed } from "@/src/query/post.query";
 import { redirect } from "next/navigation";
 import Page from "./page";
 
+export const dynamic = "force-dynamic";
+
 export default async function layout() {
   const session = await getAuthSession();
 

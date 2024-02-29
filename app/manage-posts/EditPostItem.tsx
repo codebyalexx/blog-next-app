@@ -18,10 +18,18 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
+import { deletePost } from "@/src/action/post.action";
 import { ArchiveIcon, PenIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
+import { toast } from "sonner";
 
-export const EditPostItem = ({ post }: { post: any }) => {
+export const EditPostItem = ({
+  post,
+  onPostRemove,
+}: {
+  post: any;
+  onPostRemove: (postId: string) => void;
+}) => {
   return (
     <Card>
       <CardHeader>
@@ -40,13 +48,19 @@ export const EditPostItem = ({ post }: { post: any }) => {
           <ArchiveIcon className="w-4 h-4" />
           Archive
         </Button>
-        <DeleteButton postId={post.id} />
+        <DeleteButton postId={post.id} onPostRemove={onPostRemove} />
       </CardFooter>
     </Card>
   );
 };
 
-const DeleteButton = ({ postId }: { postId: string }) => (
+const DeleteButton = ({
+  postId,
+  onPostRemove,
+}: {
+  postId: string;
+  onPostRemove: (postId: string) => void;
+}) => (
   <AlertDialog>
     <AlertDialogTrigger asChild>
       <Button variant={"destructive"} className="flex items-center gap-2">
@@ -64,7 +78,20 @@ const DeleteButton = ({ postId }: { postId: string }) => (
       </AlertDialogHeader>
       <AlertDialogFooter>
         <AlertDialogCancel>Cancel</AlertDialogCancel>
-        <AlertDialogAction>Yes, delete</AlertDialogAction>
+        <AlertDialogAction
+          onClick={async () => {
+            const res = await deletePost(postId);
+
+            if (res.success) {
+              onPostRemove(postId);
+              return toast.success("Successfully deleted post!");
+            }
+
+            toast.error(res.message || "");
+          }}
+        >
+          Yes, delete
+        </AlertDialogAction>
       </AlertDialogFooter>
     </AlertDialogContent>
   </AlertDialog>

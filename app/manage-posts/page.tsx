@@ -9,6 +9,8 @@ import { useState } from "react";
 import { EditPostItem } from "./EditPostItem";
 import { PostsFilter } from "./PostsFilter";
 
+export const dynamic = "force-dynamic";
+
 const getFilter = (filter: string, a: any, b: any) => {
   switch (filter) {
     case "older":
@@ -26,9 +28,11 @@ export default function Page({
   session?: Session | null;
   posts: any[];
 }) {
+  const [postsState, setPostsState] = useState(posts);
   const [filter, setFilter] = useState("most_recent");
 
-  console.log(filter);
+  const onPostRemove = (postId: string) =>
+    setPostsState(postsState.filter((p: any) => p.id !== postId));
 
   return (
     <div className="w-full max-w-4xl space-y-2">
@@ -47,10 +51,14 @@ export default function Page({
       </div>
       <Separator />
       <div className="space-y-2 py-3">
-        {posts
+        {postsState
           .sort((a, b) => getFilter(filter, a, b))
           .map((post) => (
-            <EditPostItem key={post.id} post={post} />
+            <EditPostItem
+              key={post.id}
+              post={post}
+              onPostRemove={onPostRemove}
+            />
           ))}
       </div>
     </div>
