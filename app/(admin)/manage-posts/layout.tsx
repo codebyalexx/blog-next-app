@@ -9,7 +9,5 @@ export default async function layout() {
 
   const posts = await getAllPosts();
 
-  console.log(posts);
-
   return <Page session={session} posts={posts.data || []} />;
 }
