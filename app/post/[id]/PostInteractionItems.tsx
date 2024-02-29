@@ -18,11 +18,13 @@ import { toast } from "sonner";
 
 export const PostInteractionItems = ({
   postId,
-  defaultComments,
+  comments,
+  onCommentAdd,
   session,
 }: {
   postId: string;
-  defaultComments: any[];
+  comments: any[];
+  onCommentAdd: (comment: any) => void;
   session: Session | null;
 }) => (
   <div className="flex items-center justify-between text-muted-foreground">
@@ -30,9 +32,14 @@ export const PostInteractionItems = ({
       <div className="flex items-center gap-2 hover:text-foreground cursor-pointer">
         <HeartIcon className="w-5 h-5" /> 0
       </div>
-      <CommentSpace defaultComments={[]} postId={postId} session={session}>
+      <CommentSpace
+        comments={comments}
+        onCommentAdd={onCommentAdd}
+        postId={postId}
+        session={session}
+      >
         <div className="flex items-center gap-2 hover:text-foreground cursor-pointer">
-          <MessageCircleIcon className="w-5 h-5" /> 0
+          <MessageCircleIcon className="w-5 h-5" /> {comments.length}
         </div>
       </CommentSpace>
     </div>

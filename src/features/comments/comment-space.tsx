@@ -9,28 +9,26 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Session } from "next-auth";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import { CommentBox, CommentPostBox } from "./comment-box";
 
 export const CommentSpace = ({
   children,
-  defaultComments,
+  comments,
+  onCommentAdd,
   postId,
   session,
 }: {
   children: ReactNode;
-  defaultComments: any[];
+  comments: any[];
+  onCommentAdd: (comment: any) => void;
   postId: string;
   session: Session | null;
 }) => {
-  const [comments, setComments] = useState(defaultComments);
-  const handleCommentAdd = (comment: any) =>
-    setComments([...comments, comment]);
-
   return (
     <Sheet>
       <SheetTrigger asChild>{children}</SheetTrigger>
-      <SheetContent className="p-0">
+      <SheetContent className="p-0 overflow-y-scroll">
         <SheetHeader className="p-4">
           <SheetTitle>Comments ({comments.length})</SheetTitle>
         </SheetHeader>
@@ -39,7 +37,7 @@ export const CommentSpace = ({
             <CommentPostBox
               session={session}
               postId={postId}
-              onCommentAdd={handleCommentAdd}
+              onCommentAdd={onCommentAdd}
             />
           </div>
 

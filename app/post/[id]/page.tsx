@@ -1,19 +1,17 @@
+"use client";
+
 import { Separator } from "@/components/ui/separator";
-import { getAuthSession } from "@/lib/auth";
-import { getPostComments } from "@/src/query/comment.query";
-import { getPostData } from "@/src/query/post.query";
+import { Session } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { useState } from "react";
 import { PostInteractionItems } from "./PostInteractionItems";
 import { PostReader } from "./PostReader";
 
-const Page = async ({ params }: { params: { id: string } }) => {
-  const postData = await getPostData(params.id);
-  if (!postData) redirect("/");
-
-  const session = await getAuthSession();
-  const postComments = await getPostComments({ postId: params.id });
+const Page = ({ post, session }: { post: any; session: Session | null }) => {
+  const [comments, setComments] = useState(post.comments);
+  const handleCommentAdd = (comment: any) =>
+    setComments([comment, ...comments]);
 
   return (
     <div className="w-full max-w-2xl space-y-6 py-4 flex flex-col items-center justify-center">
@@ -22,29 +20,30 @@ const Page = async ({ params }: { params: { id: string } }) => {
           width={1400}
           height={180}
           alt="Post banner image"
-          src={postData.imageURL}
+          src={post.imageURL}
           className="w-full h-full max-h-[180px] rounded-lg object-cover"
         />
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold">{postData.title}</h1>
-          <p className="text-muted-foreground">{postData.description}</p>
+          <h1 className="text-4xl font-bold">{post.title}</h1>
+          <p className="text-muted-foreground">{post.description}</p>
         </div>
 
         <div className="space-y-3">
           <Separator />
           <PostInteractionItems
-            postId={params.id}
-            defaultComments={postComments}
+            comments={comments}
+            onCommentAdd={handleCommentAdd}
+            postId={post.id}
             session={session}
           />
           <Separator />
         </div>
 
-        <PostReader data={postData.contents} />
+        <PostReader data={post.contents} />
 
         <div className="py-16 space-y-8">
           <div className="flex items-center gap-3">
-            {postData.tags.split(";").map((tag) => (
+            {post.tags.split(";").map((tag: any) => (
               <Link
                 key={tag}
                 className="text-gray-500 bg-gray-200 dark:text-white dark:bg-black rounded-full text-sm p-2 px-4 w-fit capitalize cursor-pointer"
@@ -55,8 +54,9 @@ const Page = async ({ params }: { params: { id: string } }) => {
             ))}
           </div>
           <PostInteractionItems
-            postId={params.id}
-            defaultComments={postComments}
+            comments={comments}
+            onCommentAdd={handleCommentAdd}
+            postId={post.id}
             session={session}
           />
         </div>

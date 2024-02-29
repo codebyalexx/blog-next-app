@@ -51,12 +51,14 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  restricted    Boolean   @default(false)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   accounts      Account[]
   sessions      Session[]
   comments      Comment[]
   posts         Post[]
+  likes         Like[]
 }
 
 model NewsletterUser {
@@ -79,6 +81,18 @@ model Post {
 
   user     User      @relation(fields: [userId], references: [id], onDelete: NoAction)
   comments Comment[]
+  likes    Like[]
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  createdAt DateTime
+
+  postId String
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Comment {
