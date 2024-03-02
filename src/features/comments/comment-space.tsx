@@ -17,6 +17,7 @@ export const CommentSpace = ({
   comments,
   onCommentAdd,
   onCommentRemove,
+  onUserRestrict,
   postId,
   session,
 }: {
@@ -24,6 +25,7 @@ export const CommentSpace = ({
   comments: any[];
   onCommentAdd: (comment: any) => void;
   onCommentRemove: (comment: any) => void;
+  onUserRestrict: (userId: string) => void;
   postId: string;
   session: Session | null;
 }) => {
@@ -56,6 +58,7 @@ export const CommentSpace = ({
                 comment={comment}
                 session={session}
                 onCommentRemove={onCommentRemove}
+                onUserRestrict={onUserRestrict}
                 className={
                   comments.indexOf(comment) === comments.length - 1
                     ? ""

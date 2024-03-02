@@ -16,7 +16,7 @@ import {
 import moment from "moment";
 import Link from "next/link";
 
-export const OverviewTab = () => (
+export const OverviewTab = ({ comments }: { comments: any[] }) => (
   <TabsContent value="overview" className="w-full space-y-4">
     <div className="grid grid-cols-2 gap-4">
       <Card>
@@ -84,53 +84,21 @@ export const OverviewTab = () => (
         </CardContent>
       </Card>
     </div>
-    <RecentsComments />
+    <RecentsComments comments={comments} />
   </TabsContent>
 );
 
-export const RecentsComments = () => {
-  const COMMENTS_PLACEHOLDER = [
-    {
-      id: "fezjidzajid",
-      user: {
-        id: "ldodfedzadza",
-        image:
-          "https://wallpapers.com/images/hd/shadow-boy-white-eyes-unique-cool-pfp-nft-13yuypusuweug9xn.jpg",
-        name: "CoucouMax",
-      },
-      post: {
-        id: "dzaniogrzio",
-        title: "Super post!",
-      },
-      message: "Hello World! Here is my comment!",
-      createdAt: new Date(),
-    },
-    {
-      id: "fezjidzajid2",
-      user: {
-        id: "ldodfedzadza2",
-        image:
-          "https://static.wikia.nocookie.net/d8265e3e-26d0-439d-a336-7bf9c08ec696/scale-to-width/755",
-        name: "Bidule",
-      },
-      post: {
-        id: "dzaniogrzio2",
-        title: "Garfield?",
-      },
-      message: "I very liked this post! Do more content like this!!!",
-      createdAt: new Date(),
-    },
-  ];
+export const RecentsComments = ({ comments }: { comments: any[] }) => {
   return (
     <Card>
       <CardHeader>
         <CardTitle>Recents comments</CardTitle>
         <CardDescription>
-          You have received {COMMENTS_PLACEHOLDER.length} comments this month
+          You have received {comments.length} comments this month
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        {COMMENTS_PLACEHOLDER.map((comment) => (
+        {comments.map((comment) => (
           <div
             key={comment.id}
             className="flex items-center space-x-2 pb-2 border-b border-b-border"

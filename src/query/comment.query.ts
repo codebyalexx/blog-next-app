@@ -16,3 +16,14 @@ export const getPostComments = async (postId: string) => {
 
   return postComments;
 };
+
+export const getAllComments = async () => {
+  const comments = await prisma.comment.findMany({
+    select: COMMENT_SELECT,
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return comments;
+};

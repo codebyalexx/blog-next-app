@@ -23,8 +23,6 @@ export const UsersTab = ({ defaultUsers }: { defaultUsers: any }) => {
       })
     );
 
-  console.log(defaultUsers, users);
-
   return (
     <TabsContent value="users">
       {defaultUsers.success === false && (
