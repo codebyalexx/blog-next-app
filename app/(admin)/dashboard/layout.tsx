@@ -17,7 +17,7 @@ const Page = ({ children }: { children: ReactNode }) => (
             <TabsTrigger value="analytics">Analytics</TabsTrigger>
             <TabsTrigger value="comments">Comments</TabsTrigger>
             <TabsTrigger value="users">Users</TabsTrigger>
-            <TabsTrigger value="moderation">Moderation</TabsTrigger>
+            <TabsTrigger value="features">Features</TabsTrigger>
           </TabsList>
           {children}
         </Tabs>

@@ -13,10 +13,12 @@ import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { Writers, cn } from "@/lib/utils";
 import { addComment, deleteComment } from "@/src/action/comment.action";
+import { toggleUserRestriction } from "@/src/action/moderation.action";
 import {
   FlagIcon,
   MoreVerticalIcon,
   ShieldAlertIcon,
+  ShieldIcon,
   TrashIcon,
 } from "lucide-react";
 import moment from "moment";
@@ -122,11 +124,13 @@ export const CommentBox = ({
   session,
   className,
   onCommentRemove,
+  onUserRestrict,
 }: {
   comment: any;
   session: Session | null;
   className?: string;
   onCommentRemove: (commentId: string) => void;
+  onUserRestrict: (userId: string) => void;
 }) => {
   const [deleteLoading, startDeleteTransition] = useTransition();
   const handleDeleteComment = async () => {
@@ -136,6 +140,20 @@ export const CommentBox = ({
       if (res.success) {
         toast.success("Successfully deleted comment!");
         onCommentRemove(comment.id);
+      } else {
+        toast.error(res.message);
+      }
+    });
+  };
+
+  const [restrictLoading, startRestrictTransition] = useTransition();
+  const handleUserRestrict = async () => {
+    startRestrictTransition(async () => {
+      const res = await toggleUserRestriction(comment.userId);
+
+      if (res.success) {
+        toast.success("Successfully restricted user!");
+        onUserRestrict(comment.userId);
       } else {
         toast.error(res.message);
       }
@@ -206,9 +224,16 @@ export const CommentBox = ({
                   <Button
                     variant={"ghost"}
                     className="flex items-center gap-2 w-full"
-                    disabled
+                    disabled={restrictLoading}
+                    onClick={handleUserRestrict}
                   >
-                    <ShieldAlertIcon className="w-4 h-4" /> Restrict user
+                    {deleteLoading ? (
+                      <Loader />
+                    ) : (
+                      <>
+                        <ShieldIcon className="w-4 h-4" /> Restrict user
+                      </>
+                    )}
                   </Button>
                 </>
               )}
