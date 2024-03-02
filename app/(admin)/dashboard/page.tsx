@@ -7,6 +7,8 @@ import { FeaturesTab } from "./_/FeaturesTab";
 import { OverviewTab } from "./_/OverviewTab";
 import { UsersTab } from "./_/UsersTab";
 
+export const dynamic = "force-dynamic";
+
 const Page = async () => {
   const session = await getAuthSession();
   const users = await getUsers();

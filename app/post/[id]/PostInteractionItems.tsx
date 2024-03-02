@@ -55,6 +55,7 @@ export const PostInteractionItems = ({
           comments={comments}
           onCommentAdd={onCommentAdd}
           onCommentRemove={onCommentRemove}
+          onUserRestrict={onUserRestrict}
           postId={postId}
           session={session}
         >

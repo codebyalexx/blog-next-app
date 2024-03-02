@@ -1,9 +1,11 @@
 import { prisma } from "@/lib/prisma";
+import { getFeatureFlag } from "@/src/features/features-flag/features-utils";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { AuthOptions, getServerSession } from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
+import { Writers } from "./utils";
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -22,10 +24,20 @@ export const authOptions: AuthOptions = {
   ],
   adapter: PrismaAdapter(prisma),
   callbacks: {
-    session({ session, user }: any) {
+    async session({ session, user }: any) {
       if (!session.user) return session;
       session.user.id = user.id;
       return session;
+    },
+    async signIn({ user }) {
+      const isWriter = Writers.includes(user?.email || "");
+      const isAuthEnabled = (await getFeatureFlag("auth")).enabled;
+
+      if (isAuthEnabled || isWriter) {
+        return true;
+      } else {
+        return "/fun/auth-disabled";
+      }
     },
   },
 };

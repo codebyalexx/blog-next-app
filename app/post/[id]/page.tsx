@@ -11,6 +11,8 @@ import { toast } from "sonner";
 import { PostInteractionItems } from "./PostInteractionItems";
 import { PostReader } from "./PostReader";
 
+export const dynamic = "force-dynamic";
+
 const Page = ({ post, session }: { post: any; session: Session | null }) => {
   const [comments, setComments] = useState(post.comments);
   const handleCommentAdd = (comment: any) =>
