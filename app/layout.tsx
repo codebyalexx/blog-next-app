@@ -24,14 +24,20 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className="overflow-x-hidden">
+      <body className="overflow-x-hidden h-full">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Header session={session} />
-          <main className="*:z-10 flex flex-col items-center w-full p-4">
-            {children}
-          </main>
+          <div className="flex flex-col min-h-screen">
+            <div className="flex-grow flex-shrink-0 flex-auto">
+              <Header session={session} />
+              <main className="*:z-10 flex flex-col items-center w-full p-4">
+                {children}
+              </main>
+            </div>
+            <div className="flex-shrink-0">
+              <Footer />
+            </div>
+          </div>
           <Toaster position="bottom-center" />
-          <Footer />
           <CookieConsent />
           {modal}
         </ThemeProvider>
