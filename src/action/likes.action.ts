@@ -2,8 +2,17 @@
 
 import { prisma } from "@/lib/prisma";
 import { getAuthSession } from "../../lib/auth";
+import { getFeatureFlag } from "../features/features-flag/features-utils";
 
 export const toggleLike = async (postId: string, userId: string) => {
+  /* Checking feature flag */
+  const likeFeatureFlag = await getFeatureFlag("likes");
+  if (!likeFeatureFlag.enabled)
+    return {
+      success: false,
+      message: "Like feature is currently disabled!",
+    };
+
   /* checking session */
   const session = await getAuthSession();
   if (!session || userId !== session?.user?.id)

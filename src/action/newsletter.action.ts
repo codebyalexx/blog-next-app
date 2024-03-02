@@ -1,5 +1,6 @@
 "use server";
 import { prisma } from "@/lib/prisma";
+import { getFeatureFlag } from "../features/features-flag/features-utils";
 
 async function isInNewsletter({ email, id }: { email?: string; id?: string }) {
   /* It's checking if the mail is in the newsletter */
@@ -31,6 +32,14 @@ async function isInNewsletter({ email, id }: { email?: string; id?: string }) {
 }
 
 export async function registerToNewsletter(email: string) {
+  /* Checking feature flag */
+  const newsletterFeatureFlag = await getFeatureFlag("newsletter");
+  if (!newsletterFeatureFlag.enabled)
+    return {
+      success: false,
+      message: "Newsletter feature is currently disabled!",
+    };
+
   const isRegistered = await isInNewsletter({ email });
 
   if (isRegistered)

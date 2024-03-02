@@ -1,1 +1,7 @@
-{"likes":true,"comments":true,"auth":true}
+{
+  "contact": true,
+  "newsletter": true,
+  "likes": true,
+  "comments": true,
+  "auth": true
+}

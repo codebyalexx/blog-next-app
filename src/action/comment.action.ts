@@ -4,6 +4,7 @@ import { getAuthSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { Writers } from "../../lib/utils";
 import { COMMENT_SELECT } from "../features/comments/comment-utils";
+import { getFeatureFlag } from "../features/features-flag/features-utils";
 
 interface IAddComments {
   postId: string;
@@ -12,6 +13,14 @@ interface IAddComments {
 }
 
 export const addComment = async ({ postId, userId, message }: IAddComments) => {
+  /* Checking feature flag */
+  const commentFeatureFlag = await getFeatureFlag("comments");
+  if (!commentFeatureFlag.enabled)
+    return {
+      success: false,
+      message: "Comments feature is currently disabled!",
+    };
+
   /* Checking auth session */
   const session = await getAuthSession();
 
@@ -67,6 +76,14 @@ export const addComment = async ({ postId, userId, message }: IAddComments) => {
 };
 
 export const deleteComment = async (commentId: string) => {
+  /* Checking feature flag */
+  const commentFeatureFlag = await getFeatureFlag("comments");
+  if (!commentFeatureFlag.enabled)
+    return {
+      success: false,
+      message: "Comments feature is currently disabled!",
+    };
+
   /* Retrieving comment */
   const comment = await prisma.comment.findFirst({
     where: {

@@ -17,3 +17,11 @@ export const getFeaturesData = async () => {
 export const saveFeaturesData = async (data: any) => {
   await writeFile(getFeaturesFilePath(), JSON.stringify(data));
 };
+
+export const getFeatureFlag = async (feature: string) => {
+  const features = await getFeaturesData();
+  return {
+    feature,
+    enabled: features[feature] || false,
+  };
+};
