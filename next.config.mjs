@@ -8,6 +8,15 @@ const nextConfig = {
       },
     ],
   },
+  env: {
+    GOOGLE_TRANSLATION_CONFIG: JSON.stringify({
+      languages: [
+        { title: "English", name: "en" },
+        { title: "Français", name: "fr" },
+      ],
+      defaultLanguage: "en",
+    }),
+  },
 };
 
 export default nextConfig;

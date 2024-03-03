@@ -6,16 +6,13 @@ import { MenuIcon } from "lucide-react";
 import { Session } from "next-auth";
 import Link from "next/link";
 import { useState } from "react";
+import { LanguageSwitcher } from "../language-switcher";
 import { ThemeToggle } from "../theme-toggle";
 import { Button } from "../ui/button";
 import { Brand } from "./Logo";
 
 export const Header = ({ session }: { session: Session | null }) => {
   const [expanded, setExpanded] = useState(false);
-
-  const toggleExpand = () => {
-    setExpanded((v) => !v);
-  };
 
   return (
     <header
@@ -48,6 +45,7 @@ export const Header = ({ session }: { session: Session | null }) => {
           </nav>
           <div className="flex items-center gap-2">
             <HeaderProfile session={session} />
+            <LanguageSwitcher />
             <ThemeToggle />
           </div>
         </div>
