@@ -42,8 +42,13 @@ export const metadata: Metadata = {
     description: "Believe the Hike! Welcome to my 'Lifestyle' blog! ",
     images: "/assets/images/static/hero2.webp",
   },
-  other: { author: "CodeByAlexx", "revisit-after": "7 days" },
   robots: "index, follow",
+  manifest: "/manifest.webmanifest",
+  other: {
+    author: "CodeByAlexx",
+    "revisit-after": "7 days",
+    "theme-color": "#000",
+  },
 };
 
 export default async function RootLayout({

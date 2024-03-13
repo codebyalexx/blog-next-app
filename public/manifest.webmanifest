@@ -1,0 +1,52 @@
+{
+  "short_name": "AdventuresByAlexx",
+  "name": "Adventures by Alexx",
+  "icons": [
+    {
+      "src": "/Logo.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/assets/icons/Icon_x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ],
+  "id": "/?source=pwa",
+  "start_url": "/?source=pwa",
+  "background_color": "#000",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#000",
+  "shortcuts": [
+    {
+      "name": "See the latest post",
+      "short_name": "Latest Post",
+      "description": "Click to being redirect to my latest blog post",
+      "url": "/fun/latest-post"
+    }
+  ],
+  "description": "Believe the Hike & welcome to my 'lifestyle' blog!",
+  "screenshots": [
+    {
+      "src": "/assets/images/static/hero2.webp",
+      "type": "image/webp",
+      "sizes": "1758x1319",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/assets/images/static/hero0.webp",
+      "type": "image/webp",
+      "sizes": "1758x1319",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/assets/images/static/hero1.webp",
+      "type": "image/webp",
+      "sizes": "1758x1319",
+      "form_factor": "narrow"
+    }
+  ]
+}

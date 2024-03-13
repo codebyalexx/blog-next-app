@@ -56,6 +56,7 @@ export const Header = ({ session }: { session: Session | null }) => {
               e.stopPropagation();
               setExpanded((v) => !v);
             }}
+            aria-label="Toggle navigation menu"
           >
             <MenuIcon />
           </Button>

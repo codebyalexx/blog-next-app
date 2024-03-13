@@ -38,6 +38,7 @@ export const Footer = () => (
                 variant: "ghost",
                 className: "hover:bg-white hover:text-black text-white",
               })}
+              aria-label="Instagram profile link"
             >
               <InstagramLogoIcon className="h-6 w-6" />
             </Link>
@@ -48,6 +49,7 @@ export const Footer = () => (
                 variant: "ghost",
                 className: "hover:bg-white hover:text-black text-white",
               })}
+              aria-label="Discord server link"
             >
               <DiscordLogoIcon className="h-6 w-6" />
             </Link>
@@ -58,6 +60,7 @@ export const Footer = () => (
                 variant: "ghost",
                 className: "hover:bg-white hover:text-black text-white",
               })}
+              aria-label="Github profile link"
             >
               <GitHubLogoIcon className="h-6 w-6" />
             </Link>
@@ -68,6 +71,7 @@ export const Footer = () => (
                 variant: "ghost",
                 className: "hover:bg-white hover:text-black text-white",
               })}
+              aria-label="Youtube channel link"
             >
               <Youtube className="h-6 w-6" />
             </Link>

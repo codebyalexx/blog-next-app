@@ -5,8 +5,6 @@ import { getPostData } from "@/src/query/post.query";
 import { redirect } from "next/navigation";
 import { PostPageClientSide } from "./client-side";
 
-export const dynamic = "force-dynamic";
-
 export default async function Page({ params }: { params: { id: string } }) {
   const postData = await getPostData(params.id);
   if (!postData) redirect("/");
