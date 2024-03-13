@@ -10,8 +10,40 @@ import { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Adventures by Alex",
-  description: "Adventures by Alex — Believe The Hike",
+  metadataBase: new URL("https://adventuresbyalexx.com"),
+  title: "Adventures by Alexx",
+  description: "Believe The Hike!",
+  keywords: [
+    "Adventures By Alex",
+    "CodeByAlexx",
+    "believe the hike",
+    "Trekking",
+    "Randonnée",
+    "lifestyle",
+    "blog",
+    "adventures",
+    "aventures",
+    "alexandre",
+    "paimpol",
+    "france",
+    "saint-brieuc",
+    "corse",
+    "gr",
+    "gr 34",
+    "gr 20",
+  ],
+  openGraph: {
+    title: "Adventures by Alexx",
+    description: "Believe The Hike! Welcome to my 'Lifestyle' blog!",
+    images: "/assets/images/static/hero2.webp",
+  },
+  twitter: {
+    title: "Adventures by Alexx",
+    description: "Believe the Hike! Welcome to my 'Lifestyle' blog! ",
+    images: "/assets/images/static/hero2.webp",
+  },
+  other: { author: "CodeByAlexx", "revisit-after": "7 days" },
+  robots: "index, follow",
 };
 
 export default async function RootLayout({

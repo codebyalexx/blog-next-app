@@ -5,7 +5,7 @@ const Page = () => (
   <div className="w-full max-w-2xl py-6">
     <ContactForm className="border-none shadow-none" />
     <Image
-      src={"/type-computer.gif"}
+      src={"/assets/images/static/type-computer-min.gif"}
       alt="Cat typing on computer"
       width={800}
       height={400}

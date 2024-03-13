@@ -31,7 +31,7 @@ export const LanguageSwitcher = ({ context }: LanguageSwitcherProps = {}) => {
       <SelectContent>
         <SelectItem value="en">
           <Image
-            src={"/flag_US.webp"}
+            src={"/assets/icons/flag_US.webp"}
             width={64}
             height={64}
             alt="English"
@@ -40,7 +40,7 @@ export const LanguageSwitcher = ({ context }: LanguageSwitcherProps = {}) => {
         </SelectItem>
         <SelectItem value="fr">
           <Image
-            src={"/flag_FR.webp"}
+            src={"/assets/icons/flag_FR.webp"}
             width={64}
             height={64}
             alt="Français"

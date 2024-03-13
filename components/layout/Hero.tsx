@@ -30,7 +30,7 @@ export const Hero = () => {
       <div className="hidden lg:flex items-center space-x-5">
         <Image
           className="h-[580px] w-[80%] rounded-md object-cover object-center shadow-md"
-          src={"/hero2.jpg"}
+          src={"/assets/images/static/hero2.webp"}
           width={1000}
           height={1450}
           alt="Sunset on the ocean"
@@ -38,7 +38,7 @@ export const Hero = () => {
 
         <Image
           className="h-[580px] w-[80%] rounded-md object-cover object-center shadow-md"
-          src={"/hero0.jpg"}
+          src={"/assets/images/static/hero0.webp"}
           width={1000}
           height={1450}
           alt="Sunset on the ocean"
@@ -46,7 +46,7 @@ export const Hero = () => {
 
         <Image
           className="h-[580px] w-[80%] rounded-md object-cover object-center shadow-md"
-          src={"/hero1.jpg"}
+          src={"/assets/images/static/hero1.webp"}
           width={1000}
           height={800}
           alt="Sunset on the ocean"
