@@ -5,6 +5,7 @@ import { getPostData } from "@/src/query/post.query";
 
 const Page = async ({ params }: { params: { postId: string } }) => {
   const session = await getAuthSession();
+
   const postData = await getPostData(params.postId);
 
   return (

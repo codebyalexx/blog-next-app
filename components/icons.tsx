@@ -181,6 +181,7 @@ export const Icons = {
   codeblock: FileCode,
   color: Baseline,
   column: RectangleVertical,
+  chevronDown: ChevronDown,
   combine: Combine,
   ungroup: Ungroup,
   comment: MessageSquare,

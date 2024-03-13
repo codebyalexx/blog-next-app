@@ -204,7 +204,7 @@ export const CommentBox = ({
               >
                 <FlagIcon className="w-4 h-4" /> Report comment
               </Button>
-              {Writers.includes(session?.user?.email) && (
+              {Writers.includes(session?.user?.email || "") && (
                 <>
                   <Separator className="my-2" />
                   <Button

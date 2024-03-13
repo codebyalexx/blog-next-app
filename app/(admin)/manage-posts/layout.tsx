@@ -1,13 +1,7 @@
-import { getAuthSession } from "@/lib/auth";
-import { getAllPosts } from "@/src/query/post.query";
-import Page from "./page";
+import { ReactNode } from "react";
 
 export const dynamic = "force-dynamic";
 
-export default async function layout() {
-  const session = await getAuthSession();
-
-  const posts = await getAllPosts();
-
-  return <Page session={session} posts={posts.data || []} />;
+export default async function layout({ children }: { children: ReactNode }) {
+  return <>{children}</>;
 }

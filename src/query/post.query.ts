@@ -2,6 +2,7 @@
 
 import { getAuthSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { PostType } from "@/lib/types/post.types";
 import { Writers } from "@/lib/utils";
 
 export const getLatestPostId = async () => {
@@ -23,7 +24,11 @@ export const getRandomPostId = async () => {
   return posts[index]?.id || null;
 };
 
-export const getAllPosts = async () => {
+export const getAllPosts = async (): Promise<{
+  success: boolean;
+  message?: string;
+  data?: PostType[];
+}> => {
   /* Checking auth session */
   const session = await getAuthSession();
 

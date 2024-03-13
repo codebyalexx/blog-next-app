@@ -11,7 +11,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Adventures by Alex",
-  description: "Adventures by Alex — Ignite Passion",
+  description: "Adventures by Alex — Believe The Hike",
 };
 
 export default async function RootLayout({
